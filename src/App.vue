@@ -1,12 +1,48 @@
-<script setup lang="ts">
+<script  lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+
+import { defineComponent } from 'vue'
+
+
+export default defineComponent({
+    data(){
+
+        return{
+            images:[{
+          imageUrl: 'http://i.imgur.com/2ZFcyk9.png',
+          caption: 'Photo by 1'
+        },
+        {
+          imageUrl: 'http://i.imgur.com/Otaxjzf.jpg',
+          caption: 'Photo by 2'
+        },
+        {
+          imageUrl: 'http://i.imgur.com/zaJgzqQ.jpg',
+          caption: 'Photo by 3'
+        },
+        {
+          imageUrl: 'http://7xiblh.com1.z0.glb.clouddn.com/progressive/3.jpg',
+          caption: 'Photo by 4'
+        }], 
+
+        };
+
+    },
+
+});
+
+
+
+
 </script>
 
 <template>
   <h1>Hola mundo</h1>
   <div class="image-container">
   <!-- Inserta tus URLs de imágenes aquí -->
+  <!-- Use v-for to iterate over each item in the array -->
+  <img v-for="(image,index) in images" :key=index :src=image.imageUrl alt="Image"> 
+
   <img src="./images/imagen1.jpg" alt="Imagen 1">
   <img src="./images/imagen2.jpg" alt="Imagen 2">
   <img src="./images/imagen3.jpg" alt="Imagen 3">
