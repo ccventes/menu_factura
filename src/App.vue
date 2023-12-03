@@ -9,19 +9,19 @@ export default defineComponent({
 
         return{
             images:[{
-          imageUrl: 'http://i.imgur.com/2ZFcyk9.png',
+          imageUrl: 'src/images/imagen1.jpg',
           caption: 'Photo by 1'
         },
         {
-          imageUrl: 'http://i.imgur.com/Otaxjzf.jpg',
+          imageUrl: 'src/images/imagen2.jpg',
           caption: 'Photo by 2'
         },
         {
-          imageUrl: 'http://i.imgur.com/zaJgzqQ.jpg',
+          imageUrl: 'src/images/imagen3.jpg',
           caption: 'Photo by 3'
         },
         {
-          imageUrl: 'http://7xiblh.com1.z0.glb.clouddn.com/progressive/3.jpg',
+          imageUrl: "src/images/imagen1.jpg",
           caption: 'Photo by 4'
         }], 
 
@@ -43,89 +43,80 @@ export default defineComponent({
   <!-- Use v-for to iterate over each item in the array -->
   <img v-for="(image,index) in images" :key=index :src=image.imageUrl alt="Image"> 
 
+  
   <img src="./images/imagen1.jpg" alt="Imagen 1">
   <img src="./images/imagen2.jpg" alt="Imagen 2">
   <img src="./images/imagen3.jpg" alt="Imagen 3">
   <!-- Añade más imágenes según sea necesario -->
+
+  <div class="grid-item">
+       <img src="./images/imagen1.jpg" alt="Image 1"> 
+       <div class="info-texto">texto</div>
+  </div>
+  <div class="grid-item">
+      
+      <img src="./images/imagen2.jpg" alt="Image 1">  
+  </div>
+
 </div>
 </template>
 
 <style scoped>
-.image-container {
-      display: flex;
-      width: 10vw; /* El 20% del ancho de la ventana gráfica */
-      height: auto; /* Altura automática para mantener la proporción original */
-      
-      justify-content: center;
-      align-items: center;
-      height: 20vh; /* O ajusta según tus necesidades */
-    }
 
-.image-container img {
-      max-width: 100%;
-      height: auto;
-      margin-right: 10px; /* Espacio entre las imágenes */
-}
 
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
+.image-container{
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
+    width: 800px; /* Set your desired width */
+    height: auto; /* Maintain the aspect ratio */
     display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
+    flex-direction: row;
     flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+    
 }
+.grid-item{
+  
+  position: relative;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+
+}
+
+.image-container img{
+
+  
+  width: 200px; /* Set your desired width */
+  height: auto; /* Maintain the aspect ratio */
+  border-radius: 15px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+
+img:hover {
+  transform: scale(1.3); /* Increase size on hover */
+}
+.info-texto{
+  position: absolute;
+  top: -50%;
+  left: 0%;
+}
+/*
+.intem-info{
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  
+  width: 50px; /* Set your desired width */
+  /*height: auto; /* Maintain the aspect ratio */
+  
+  /*color: white;
+  opacity: 0;
+  transition: opacity 0.3s; /* Add a smooth transition effect */
+  /*top: 50%;
+  left: 50%;
+  z-index: 2 ;
+}
+
+/*/
 </style>
