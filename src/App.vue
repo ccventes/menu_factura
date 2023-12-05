@@ -97,7 +97,7 @@ img:hover {
   transform: scale(1.3); /* Increase size on hover */
 }
 .info-texto{
-  position: absolute;
+  position: relative;
   top: -50%;
   left: 0%;
 }
