@@ -1,35 +1,75 @@
 <script  lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 
-
+interface Iimage {
+  imageUrl: String,
+  caption:  String,
+  valor : number
+  isActive: boolean
+}
 export default defineComponent({
     data(){
 
         return{
-            images:[{
+        isActive: false,
+        images:[{
           imageUrl: 'src/images/imagen1.jpg',
-          caption: 'Photo by 1'
+          caption: 'Photo by 1',
+          valor : 1,
+          isActive: false,
+          
         },
         {
           imageUrl: 'src/images/imagen2.jpg',
-          caption: 'Photo by 2'
+          caption: 'Photo by 2',
+          valor : 1,
+          isActive: false,
         },
         {
           imageUrl: 'src/images/imagen3.jpg',
-          caption: 'Photo by 3'
+          caption: 'Photo by 3',
+          valor : 1,
+          isActive: false,
         },
         {
           imageUrl: "src/images/imagen1.jpg",
-          caption: 'Photo by 4'
+          caption: 'Photo by 4',
+          valor : 1,
+          isActive: false,
         }], 
 
         };
 
     },
+    methods: {
+       select_image(image: Iimage){
+        console.log( `Image clicked`);
+        console.log(image)
+        image.isActive = !image.isActive;
+        if(image.isActive === true){
+
+          image.valor = 0.3;
+        }
+        else{
+
+          image.valor = 1;
+        }
+        
+        
+        
+
+
+       },
+
+    },
 
 });
+
+
+
+
 
 
 
@@ -41,22 +81,17 @@ export default defineComponent({
   <div class="image-container">
   <!-- Inserta tus URLs de imágenes aquí -->
   <!-- Use v-for to iterate over each item in the array -->
-  <img v-for="(image,index) in images" :key=index :src=image.imageUrl alt="Image"> 
+  
 
   
-  <img src="./images/imagen1.jpg" alt="Imagen 1">
-  <img src="./images/imagen2.jpg" alt="Imagen 2">
-  <img src="./images/imagen3.jpg" alt="Imagen 3">
+  
   <!-- Añade más imágenes según sea necesario -->
 
-  <div class="grid-item">
-       <img src="./images/imagen1.jpg" alt="Image 1"> 
-       <div class="info-texto">texto</div>
+  <div class="grid-item" v-for="(image,index) in images" :key=index>
+       <img  @click="select_image(image)"  :src=image.imageUrl alt="vue" :style="{  opacity : image.valor}"> 
+       <div class="info-texto">cambio el texto</div>
   </div>
-  <div class="grid-item">
-      
-      <img src="./images/imagen2.jpg" alt="Image 1">  
-  </div>
+
 
 </div>
 </template>
@@ -79,7 +114,7 @@ export default defineComponent({
   display:flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.5;
+  
 
 }
 
@@ -91,32 +126,45 @@ export default defineComponent({
   border-radius: 15px;
   margin-bottom: 20px;
   margin-right: 20px;
+  transition: opacity 2s;
+  opacity: 1;
+  
 }
 
-img:hover {
-  transform: scale(1.3); /* Increase size on hover */
+
+.active{
+
+  opacity:  0.3;
 }
 .info-texto{
-  position: relative;
-  top: -50%;
-  left: 0%;
-}
-/*
-.intem-info{
-  margin: 0;
-  padding: 0;
   position: absolute;
+
+  z-index: -1;
+  font-family: Montserrat;
+  font-weight: bold;
+  font-size: 20px;
   
-  width: 50px; /* Set your desired width */
-  /*height: auto; /* Maintain the aspect ratio */
+  width: 80%;
+  height: 80%;
   
-  /*color: white;
-  opacity: 0;
-  transition: opacity 0.3s; /* Add a smooth transition effect */
-  /*top: 50%;
-  left: 50%;
-  z-index: 2 ;
+  
+}
+.info-texto:hover{
+  z-index: 1;
+  font-family: Montserrat;
+  font-weight: bold;
+  font-size: 20px;
+  
+  
+
+}
+@font-face {
+    font-family: Montserrat;
+    src: url('~@/assets/fonts/Montserrat/static/Montserrat-Bold.ttf');
 }
 
-/*/
+
+
+
+
 </style>
