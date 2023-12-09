@@ -2,10 +2,11 @@
 
 #app {
   max-width: 1280px;
-  margin: 0 auto;
+  margin-left: 20px;
   padding: 2rem;
 
   font-weight: normal;
+  border: solid 1px;
   
   
 }
@@ -30,8 +31,13 @@ a,
 @media (min-width: 1024px) {
   body {
     display: flex;
-    place-items: center;
+    place-items: start;
   }
 
  
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url('~@/assets/fonts/Montserrat/static/Montserrat-Bold.ttf');
 }
