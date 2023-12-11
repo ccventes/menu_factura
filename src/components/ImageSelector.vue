@@ -115,12 +115,11 @@ export default defineComponent({
 
 .image-container{
 
-    width: 600px; /* Set your desired width */
+    width: 800px; /* Set your desired width */
     height: auto; /* Maintain the aspect ratio */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    
     
     
 }
