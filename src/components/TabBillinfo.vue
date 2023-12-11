@@ -17,7 +17,7 @@ export default defineComponent({
 .container-tab {
 
     background-color:lightgreen;
-    width: 500px;
+    width: 800px;
     height: 25px;
 }
 
