@@ -1,5 +1,6 @@
 <script  lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+//import anime from 'animejs'
 
 import { defineComponent, ref } from 'vue'
 
@@ -8,12 +9,23 @@ interface Iimage {
   caption:  String,
   valor : number
   isActive: boolean,
-  zindex: number
+  zindex: number,
+  isButtonDisabled : boolean
+}
+
+interface IFoodInfo{
+  price:  number,
+  description: String,
+  Modifications: String,
+  CookTime: number,
+  Category: String
+
 }
 export default defineComponent({
     data(){
 
         return{
+        
         isActive: false,
         images:[{
           imageUrl: 'src/images/imagen1.jpg',
@@ -21,6 +33,14 @@ export default defineComponent({
           valor : 1,
           isActive: false,
           zindex: 1,
+          isButtonDisabled : true,
+          foodInfo : {
+            price : 50000,
+            description :  'sopa de verengena con crema imagineu',
+            Modifications: '',
+            CookTime: 30,
+            Category: ''
+          }
           
         },
         {
@@ -29,6 +49,14 @@ export default defineComponent({
           valor : 1,
           isActive: false,
           zindex: 1,
+          isButtonDisabled : true,
+          foodInfo : {
+            price : 70000,
+            description :  'pasta alfredo con pollo teriyaki',
+            Modifications: '',
+            CookTime: 30,
+            Category: ''
+          }
 
         },
         {
@@ -37,6 +65,14 @@ export default defineComponent({
           valor : 1,
           isActive: false,
           zindex: 1,
+          isButtonDisabled : true,
+          foodInfo : {
+            price : 90000,
+            description :  'sho que se che',
+            Modifications: '',
+            CookTime: 30,
+            Category: ''
+          }
 
         },
         {
@@ -45,6 +81,14 @@ export default defineComponent({
           valor : 1,
           isActive: false,
           zindex: 1,
+          isButtonDisabled : true,
+          foodInfo : {
+            price : 120000,
+            description :  'Por que hice tanta comida?',
+            Modifications: '',
+            CookTime: 30,
+            Category: ''
+          }
 
         }], 
 
@@ -65,12 +109,13 @@ export default defineComponent({
 
           image.valor = 1;
           image.zindex = 1;
+          image.isButtonDisabled = true;
         }
-        
-        
-        
-
-
+       },
+       click_button(){
+        //targets: this.$refs.square,
+        //translateX: 500
+        console.log("click on  button in image")
        },
 
     },
@@ -98,11 +143,11 @@ export default defineComponent({
   <!-- Añade más imágenes según sea necesario -->
 
   <div class="grid-item" @click="select_image(image)" v-for="(image,index) in images" :key=index>
-       <img    :src=image.imageUrl alt="vue" :style="{  opacity : image.valor, zIndex : image.zindex}"> 
-       <div class="info-texto">cambio el texto
-
-        <button class = "Expander"> Expandir </button>
+       <img    :src=image.imageUrl alt="vue" :style="{  opacity : image.valor, zIndex : image.zindex }"> 
+       <div class="info-texto" >cambio el texto
        </div>
+       <button class = "Expander" @click = "click_button" > Expandir </button>
+       
        <h3>{{image.caption}}</h3>
   </div>
 
@@ -186,8 +231,9 @@ export default defineComponent({
 
 .Expander{
 
+    position:absolute;
     margin-top: 130px;
-    z-index: 2;
+    z-index: 3; /*No te olvides modi*/ 
 
 }
 </style>
