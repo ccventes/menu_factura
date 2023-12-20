@@ -1,6 +1,6 @@
 <script  lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-//import anime from 'animejs'
+
 
 import { defineComponent, ref } from 'vue'
 
@@ -21,6 +21,12 @@ interface IFoodInfo{
   Category: String
 
 }
+
+interface Ibutton{
+
+    message: String
+    show: boolean
+}
 export default defineComponent({
     data(){
 
@@ -40,6 +46,11 @@ export default defineComponent({
             Modifications: '',
             CookTime: 30,
             Category: ''
+          },
+          button :{
+
+            message: 'Expander',
+            show: true,
           }
           
         },
@@ -56,6 +67,11 @@ export default defineComponent({
             Modifications: '',
             CookTime: 30,
             Category: ''
+          },
+          button :{
+
+              message: 'Expander',
+              show: true,
           }
 
         },
@@ -72,6 +88,11 @@ export default defineComponent({
             Modifications: '',
             CookTime: 30,
             Category: ''
+          },
+          button :{
+
+              message: 'Expander',
+              show: true,
           }
 
         },
@@ -88,6 +109,11 @@ export default defineComponent({
             Modifications: '',
             CookTime: 30,
             Category: ''
+          },
+          button :{
+
+            message: 'Expander',
+            show: true,
           }
 
         }], 
@@ -102,7 +128,7 @@ export default defineComponent({
         image.isActive = !image.isActive;
         if(image.isActive === true){
 
-          image.valor = 0.3;
+          image.valor = 0.0;
           image.zindex = -1;
         }
         else{
@@ -112,10 +138,16 @@ export default defineComponent({
           image.isButtonDisabled = true;
         }
        },
-       click_button(){
+       click_button : function(button: Ibutton){
         //targets: this.$refs.square,
         //translateX: 500
-        console.log("click on  button in image")
+        button.message = "click"
+        button.show = false
+        
+
+
+        
+
        },
 
     },
@@ -146,7 +178,17 @@ export default defineComponent({
        <img    :src=image.imageUrl alt="vue" :style="{  opacity : image.valor, zIndex : image.zindex }"> 
        <div class="info-texto" >cambio el texto
        </div>
-       <button class = "Expander" @click = "click_button" > Expandir </button>
+       <Transition name = "fade">
+       <button v-if = "image.button.show" class = "Expander" @click = "click_button(image.button)" > {{ image.button.message }} </button>
+      </Transition>
+      <Transition name = "bounce">
+      <div v-if = "!image.button.show" id="myProgress">
+        <transition name = "progress_bar">
+          <div v-if = "!image.button.show" id="myBar"></div>
+        </transition>
+      </div>
+    </Transition>
+      
        
        <h3>{{image.caption}}</h3>
   </div>
@@ -234,6 +276,101 @@ export default defineComponent({
     position:absolute;
     margin-top: 130px;
     z-index: 3; /*No te olvides modi*/ 
+    font-size: 14px;
+}
+
+.fade-leave-active{
+  animation: fade-out 0.5s;
 
 }
+
+@keyframes fade-out{
+
+   0% {
+      opacity: 1;
+   }
+   50% {
+      opacity: 0.5;
+   }
+   100% {
+      opacity: 0;
+   }
+
+}
+
+/*Para la animacion myProgress debe cambiar del ancho actual a  60% */ 
+
+#myProgress {
+  width: 30%;
+  background-color: #ddd;
+  position: absolute;
+  transform: translateY(65px);
+  opacity: 0.5;
+}
+/*Para la animacion myBar debe cambiar del Alto  actual a  10px */
+
+#myBar {
+  width: 0%;
+  height: 30px;
+  background-color: #04AA6D;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  
+  
+}
+/*
+id="myProgress"
+       
+        id="myBar"
+*/
+
+
+
+
+.bounce-enter-active {
+  animation: bounce 0.5s forwards;
+}
+/*
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+*/
+@keyframes bounce {
+  0% {
+    width: 30%;
+  }
+  50% {
+    width: 45%;
+  }
+  100% {
+    width: 60%;
+  }
+}
+
+.progress_bar-enter-active {
+    animation: progress_bar 1s forwards;;
+
+}
+@keyframes progress_bar {
+    0%{
+      width : 0%;
+      height: 30px;
+    }
+    50%{
+      width : 0%;
+      height: 10px;
+
+    }
+    100%{
+
+      width : 100%;
+      height: 10px;
+    }
+
+}
+
+
+
+
 </style>

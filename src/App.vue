@@ -26,9 +26,6 @@ export default {
   flex-direction: row;
 
 }
-.TabBillinfo{
-  border: dashed red;  
 
-}
 
 </style>
