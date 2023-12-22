@@ -143,6 +143,8 @@ export default defineComponent({
         //translateX: 500
         button.message = "click"
         button.show = false
+        console.log("Click exclusivamente al boton")
+        console.log("debe mostrarse la barra? ", !button.show)
         
 
 
@@ -181,16 +183,16 @@ export default defineComponent({
        <Transition name = "fade">
        <button v-if = "image.button.show" class = "Expander" @click = "click_button(image.button)" > {{ image.button.message }} </button>
       </Transition>
-      <Transition name = "bounce">
-      <div v-if = "!image.button.show" id="myProgress">
-        <transition name = "progress_bar">
-          <div v-if = "!image.button.show" id="myBar"></div>
-        </transition>
+      <Transition name = "Progress" >
+      <div v-if = "!image.button.show" class = "Progress-box">
+        
+         <Transition name = "percentage"  appear>
+          <div v-if = "!image.button.show" class="myBar"></div>
+         </Transition>
       </div>
-    </Transition>
-      
-       
-       <h3>{{image.caption}}</h3>
+    </Transition>   
+    <h3>{{image.caption}}</h3>
+   <!-- <svg width="100" height="100"><circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" /></svg> -->
   </div>
 
 
@@ -300,42 +302,120 @@ export default defineComponent({
 
 /*Para la animacion myProgress debe cambiar del ancho actual a  60% */ 
 
-#myProgress {
-  width: 30%;
-  background-color: #ddd;
-  position: absolute;
-  transform: translateY(65px);
-  opacity: 0.5;
-}
-/*Para la animacion myBar debe cambiar del Alto  actual a  10px */
 
-#myBar {
-  width: 0%;
-  height: 30px;
+/*empezando en ancho 0% y alto 30px Para la animacion myBar debe cambiar del Alto  actual a  10px */
+
+
+
+.myBar {
+  width: 100%;
+  height: 10px;
   background-color: #04AA6D;
   text-align: center;
   line-height: 30px;
   color: white;
+   
+}
+.percentage-enter-active{
+
+    animation: expand 2s ease;
+}
+.percentage-leave-active{
+
+  animation: expand 2s ease;
+}
+@keyframes expand{
+  0% {
+    width: 0%;
+    height: 30px;
+    background-color: #04AA6D;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+  }
+  1% {
+    width: 1%;
+    height: 10px;
+    background-color: #04AA6D;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+  }
   
+
   
+  100%{
+    width: 100%;
+    height: 10px;
+    background-color: #04AA6D;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+
+  }
 }
 /*
 id="myProgress"
        
         id="myBar"
 */
-
-
-
-
-.bounce-enter-active {
-  animation: bounce 0.5s forwards;
+.Progress-box{ /* Este es el estado final*/ 
+  width: 60%;
+  background-color: #ddd;
+  position: absolute;
+  transform: translateY(65px);
+  opacity: 1;
 }
+
+
+
+.Progress-enter-from { /* Este es el estado inicial*/ 
+  width: 30%;
+  background-color: #ddd;
+  position: absolute;
+  transform: translateY(65px);
+  opacity: 1;
+}
+.Progress-enter-to{ /*Este es el estado final*/ 
+
+  background-color: #ddd;
+  position: absolute;
+  transform: translateY(65px);
+  opacity: 1;
+  width: 60%;  
+}
+.Progress-enter-active{/*Esta es la transción aqui se dice cuanto dura*/
+
+  transition: all 1s;
+}
+.Progress-leave-from { /* Este es el estado inicial*/ 
+  width: 30%;
+  background-color: #ddd;
+  position: absolute;
+  transform: translateY(65px);
+  opacity: 1;
+}
+.Progress-leave-to{ /*Este es el estado final*/ 
+
+background-color: #ddd;
+position: absolute;
+transform: translateY(65px);
+opacity: 1;
+width: 60%;  
+}
+
+.Progress-leave-active{/*Esta es la transción aqui se dice cuanto dura*/
+
+transition: all 1s;
+}
+/*
+
+No olvides las leave cuando lleguemos a la siguiente parte
 /*
 .bounce-leave-active {
   animation: bounce-in 0.5s reverse;
 }
-*/
+
 @keyframes bounce {
   0% {
     width: 30%;
@@ -347,28 +427,8 @@ id="myProgress"
     width: 60%;
   }
 }
+*/
 
-.progress_bar-enter-active {
-    animation: progress_bar 1s forwards;;
-
-}
-@keyframes progress_bar {
-    0%{
-      width : 0%;
-      height: 30px;
-    }
-    50%{
-      width : 0%;
-      height: 10px;
-
-    }
-    100%{
-
-      width : 100%;
-      height: 10px;
-    }
-
-}
 
 
 
