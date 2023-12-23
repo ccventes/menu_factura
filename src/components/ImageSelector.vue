@@ -28,6 +28,16 @@ interface Ibutton{
     show: boolean
 }
 export default defineComponent({
+    
+   setup(){
+        const afterEnter = () => {
+
+                console.log("animation finished")
+        
+        }
+        return {afterEnter}
+
+    },
     data(){
 
         return{
@@ -121,6 +131,7 @@ export default defineComponent({
         };
 
     },
+    
     methods: {
        select_image(image: Iimage){
         console.log( `Image clicked`);
@@ -180,17 +191,26 @@ export default defineComponent({
        <img    :src=image.imageUrl alt="vue" :style="{  opacity : image.valor, zIndex : image.zindex }"> 
        <div class="info-texto" >cambio el texto
        </div>
+       <svg x="0px" y="0px" class ="scaled-svg"
+	      viewBox="0 0 25 30" style="enable-background:new 0 0 25 30;">
+        <path class="check" d="M2,19.2C5.9,23.6,9.4,28,9.4,28L23,2"/>
+       </svg>
        <Transition name = "fade">
        <button v-if = "image.button.show" class = "Expander" @click = "click_button(image.button)" > {{ image.button.message }} </button>
       </Transition>
-      <Transition name = "Progress" >
+      <Transition name = "Progress" 
+         @after-enter = "afterEnter"
+      >
       <div v-if = "!image.button.show" class = "Progress-box">
         
          <Transition name = "percentage"  appear>
           <div v-if = "!image.button.show" class="myBar"></div>
          </Transition>
       </div>
-    </Transition>   
+      
+    </Transition> 
+    
+
     <h3>{{image.caption}}</h3>
    <!-- <svg width="100" height="100"><circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" /></svg> -->
   </div>
@@ -306,7 +326,6 @@ export default defineComponent({
 /*empezando en ancho 0% y alto 30px Para la animacion myBar debe cambiar del Alto  actual a  10px */
 
 
-
 .myBar {
   width: 100%;
   height: 10px;
@@ -408,27 +427,17 @@ width: 60%;
 
 transition: all 1s;
 }
-/*
-
-No olvides las leave cuando lleguemos a la siguiente parte
-/*
-.bounce-leave-active {
-  animation: bounce-in 0.5s reverse;
+.scaled-svg{
+  transform: scale(0.10);
+  position: absolute;
 }
-
-@keyframes bounce {
-  0% {
-    width: 30%;
-  }
-  50% {
-    width: 45%;
-  }
-  100% {
-    width: 60%;
-  }
+.check {
+  fill: none;
+  stroke: #e92222;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
-*/
-
 
 
 
